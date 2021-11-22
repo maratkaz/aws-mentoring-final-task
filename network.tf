@@ -107,7 +107,7 @@ resource "aws_subnet" "private_db_c" {
 }
 
 resource "aws_route_table" "public_rt" {
-  vpc_id = aws_vpc.example.id
+  vpc_id = aws_vpc.cloudx.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -135,7 +135,7 @@ resource "aws_route_table_association" "public_rt_subnet_c" {
 }
 
 resource "aws_route_table" "private_rt" {
-  vpc_id = aws_vpc.example.id
+  vpc_id = aws_vpc.cloudx.id
 
   route {
     cidr_block = "0.0.0.0/0"
