@@ -1,0 +1,11 @@
+*.terraform
+*.pem
+*.tfvars
+*.tfplan
+*.tfstate
+*.tfstate.backup
+*.lock.info
+*.lock.hcl
+.terraform
+.DS_Store
+commands.txt
