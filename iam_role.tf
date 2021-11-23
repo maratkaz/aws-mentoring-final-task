@@ -7,7 +7,7 @@ resource "aws_iam_role" "ghost_app" {
   name = "ghost_app"
   path = "/"
 
-  assume_role_policy = <<EOF
+  assume_role_policy = jsonencode(
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -22,11 +22,11 @@ resource "aws_iam_role" "ghost_app" {
                 "logs:PutLogEvents",
                 "ssm:GetParameter*",
                 "secretsmanager:GetSecretValue",
-                "kms:Decrypt"
+                "kms:Decrypt",
                 "elasticfilesystem:DescribeFileSystems",
                 "elasticfilesystem:ClientMount",
                 "elasticfilesystem:ClientWrite"
-            ]
+            ],
             "Principal": {
                "Service": "ec2.amazonaws.com"
             },
@@ -34,6 +34,5 @@ resource "aws_iam_role" "ghost_app" {
             "Sid": ""
         }
     ]
-}
-EOF
+})
 }
