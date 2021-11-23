@@ -5,15 +5,30 @@ resource "aws_iam_instance_profile" "ghost_app_profile" {
 
 resource "aws_iam_role" "ghost_app" {
   name = "ghost_app"
-  path = "/"
 
-  assume_role_policy = jsonencode(
-{
-    "Version": "2012-10-17",
-    "Statement": [
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  inline_policy {
+    name = "my_inline_policy"
+
+    policy = jsonencode({
+      Version = "2012-10-17"
+      Statement = [
         {
-            "Action": [
-                "ec2:Describe*",
+          Action   = [
+            "ec2:Describe*",
                 "ecr:GetAuthorizationToken",
                 "ecr:BatchCheckLayerAvailability",
                 "ecr:GetDownloadUrlForLayer",
@@ -26,13 +41,12 @@ resource "aws_iam_role" "ghost_app" {
                 "elasticfilesystem:DescribeFileSystems",
                 "elasticfilesystem:ClientMount",
                 "elasticfilesystem:ClientWrite"
-            ],
-            "Principal": {
-               "Service": "ec2.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-        }
-    ]
-})
+          ]
+          Effect   = "Allow"
+          Resource = "*"
+        },
+      ]
+    })
+  }
+
 }

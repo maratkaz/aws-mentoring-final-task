@@ -26,16 +26,6 @@ resource "aws_lb_listener" "front_end" {
   protocol          = "HTTP"
   
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.ghost-ec2.arn
-  }
-}
-
-resource "aws_lb_listener_rule" "host_based_routing" {
-  listener_arn = aws_lb_listener.front_end.arn
-  priority     = 100
-
-  action {
     type = "forward"
     forward {
       target_group {
@@ -48,16 +38,6 @@ resource "aws_lb_listener_rule" "host_based_routing" {
         weight = 50
       }
 
-    #   stickiness {
-    #     enabled  = true
-    #     duration = 600
-    #   }
-    }
-  }
-
-  condition {
-    path_pattern {
-      values = ["/*"]
     }
   }
 }
