@@ -9,3 +9,9 @@ variable "key_pair" {
 variable "db_pass" {
   default = "foobarbaz"
 }
+
+variable "availability_zones" {
+  description = "List of availability zones"
+  type = list
+  default = [ "us-east-1a", "us-east-1b", "us-east-1c" ]
+}
