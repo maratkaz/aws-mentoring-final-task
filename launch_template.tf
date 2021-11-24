@@ -33,4 +33,6 @@ resource "aws_launch_template" "ghost" {
     associate_public_ip_address = false
   }
 
+  depends_on = [ aws_db_instance.ghost ]
+
 }

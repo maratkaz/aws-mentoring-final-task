@@ -14,8 +14,8 @@ resource "aws_db_instance" "ghost" {
   password             = var.db_pass
   parameter_group_name = "default.mysql8.0"
   skip_final_snapshot  = true
-  security_group_names = [aws_security_group.mysql]
-  db_subnet_group_name = [aws_db_subnet_group.ghost]
+  vpc_security_group_ids = [aws_security_group.mysql.id]
+  db_subnet_group_name = aws_db_subnet_group.ghost.name
 }
 
 resource "aws_ssm_parameter" "secret" {
