@@ -8,6 +8,8 @@ resource "aws_autoscaling_group" "ghost_ec2_pool" {
     id      = aws_launch_template.ghost.id
     version = "$Latest"
   }
+
+  depends_on = [aws_launch_template.ghost]
 }
 
 resource "aws_autoscaling_attachment" "asg_attachment_ghost-ec2" {
