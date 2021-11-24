@@ -1,5 +1,5 @@
 variable "my_ip" {
-  default = "2.57.96.186/32"
+  default = "176.98.224.26/32"
 }
 
 variable "key_pair" {
@@ -19,7 +19,7 @@ variable "availability_zones" {
 locals {
   ecr = {
     aws_account_id = "443141460384"
-    aws_region = "es-east-1"
+    aws_region = "us-east-1"
     docker_source = "ghost:latest"
     aws_profile = "default"
     ecr_repo_name = "ghost"
