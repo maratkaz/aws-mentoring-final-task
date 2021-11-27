@@ -16,7 +16,8 @@ resource "aws_internet_gateway" "gw" {
 resource "aws_subnet" "public_a" {
   vpc_id     = aws_vpc.cloudx.id
   cidr_block = "10.10.1.0/24"
-  availability_zone = "us-east-1a"
+  # availability_zone = "us-east-1a"
+  availability_zone = var.availability_zones[0]
   map_public_ip_on_launch = true
 
   tags = {
@@ -27,7 +28,8 @@ resource "aws_subnet" "public_a" {
 resource "aws_subnet" "public_b" {
   vpc_id     = aws_vpc.cloudx.id
   cidr_block = "10.10.2.0/24"
-  availability_zone = "us-east-1b"
+  # availability_zone = "us-east-1b"
+  availability_zone = var.availability_zones[1]
   map_public_ip_on_launch = true
 
   tags = {
@@ -38,7 +40,8 @@ resource "aws_subnet" "public_b" {
 resource "aws_subnet" "public_c" {
   vpc_id     = aws_vpc.cloudx.id
   cidr_block = "10.10.3.0/24"
-  availability_zone = "us-east-1c"
+  # availability_zone = "us-east-1c"
+  availability_zone = var.availability_zones[2]
   map_public_ip_on_launch = true
 
   tags = {
@@ -49,7 +52,8 @@ resource "aws_subnet" "public_c" {
 resource "aws_subnet" "private_a" {
   vpc_id     = aws_vpc.cloudx.id
   cidr_block = "10.10.10.0/24"
-  availability_zone = "us-east-1a"
+  # availability_zone = "us-east-1a"
+  availability_zone = var.availability_zones[0]
 
   tags = {
     Name = "private_a"
@@ -59,7 +63,8 @@ resource "aws_subnet" "private_a" {
 resource "aws_subnet" "private_b" {
   vpc_id     = aws_vpc.cloudx.id
   cidr_block = "10.10.11.0/24"
-  availability_zone = "us-east-1b"
+  # availability_zone = "us-east-1b"
+  availability_zone = var.availability_zones[1]
 
   tags = {
     Name = "private_b"
@@ -69,7 +74,8 @@ resource "aws_subnet" "private_b" {
 resource "aws_subnet" "private_c" {
   vpc_id     = aws_vpc.cloudx.id
   cidr_block = "10.10.12.0/24"
-  availability_zone = "us-east-1c"
+  # availability_zone = "us-east-1c"
+  availability_zone = var.availability_zones[2]
 
   tags = {
     Name = "private_c"
@@ -79,7 +85,8 @@ resource "aws_subnet" "private_c" {
 resource "aws_subnet" "private_db_a" {
   vpc_id     = aws_vpc.cloudx.id
   cidr_block = "10.10.20.0/24"
-  availability_zone = "us-east-1a"
+  # availability_zone = "us-east-1a"
+  availability_zone = var.availability_zones[0]
 
   tags = {
     Name = "private_db_a"
@@ -89,7 +96,8 @@ resource "aws_subnet" "private_db_a" {
 resource "aws_subnet" "private_db_b" {
   vpc_id     = aws_vpc.cloudx.id
   cidr_block = "10.10.21.0/24"
-  availability_zone = "us-east-1b"
+  # availability_zone = "us-east-1b"
+  availability_zone = var.availability_zones[1]
 
   tags = {
     Name = "private_db_b"
@@ -99,7 +107,8 @@ resource "aws_subnet" "private_db_b" {
 resource "aws_subnet" "private_db_c" {
   vpc_id     = aws_vpc.cloudx.id
   cidr_block = "10.10.22.0/24"
-  availability_zone = "us-east-1c"
+  # availability_zone = "us-east-1c"
+  availability_zone = var.availability_zones[2]
 
   tags = {
     Name = "private_db_c"

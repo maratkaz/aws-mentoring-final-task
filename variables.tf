@@ -10,6 +10,14 @@ variable "db_pass" {
   default = "foobarbaz"
 }
 
+variable "db_user" {
+  default = "admin"
+}
+
+variable "db_name" {
+  default = "mydb"
+}
+
 variable "availability_zones" {
   description = "List of availability zones"
   type = list
