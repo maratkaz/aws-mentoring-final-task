@@ -3,7 +3,8 @@ resource "aws_ecs_cluster" "ghost" {
   depends_on = [ module.ecr_mirror ]
 }
 
-resource "aws_ecs_task_definition" "service" {
+resource "aws_ecs_task_definition" "ghost_task_definition" {
+  depends_on = [aws_db_instance.ghost, aws_ecr_repository.ghost]
   family = "service"
   requires_compatibilities = ["FARGATE"]
   network_mode = "awsvpc"
@@ -59,5 +60,24 @@ data "template_file" "task_definition_template" {
     REPOSITORY_URL = replace(aws_ecr_repository.ghost.repository_url, "https://", "")
     DB_URL = aws_db_instance.ghost.address
   }
+}
+
+resource "aws_ecs_service" "ghost_service" {
+  name            = "ghost_service"
+  cluster         = aws_ecs_cluster.ghost.id
+  task_definition = aws_ecs_task_definition.ghost_task_definition.arn
+  desired_count   = 1
+
+  network_configuration {
+    security_groups = [aws_security_group.fargate_pool.id]
+    subnets         = [aws_subnet.private_a.id, aws_subnet.private_b.id, aws_subnet.private_c.id]
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.ghost-fargate.arn
+    container_name   = "ghost"
+    container_port   = 2368
+  }
+
 }
 
