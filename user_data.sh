@@ -21,8 +21,8 @@ sudo yum install -y jq
 
 mac=`curl -s http://169.254.169.254/latest/meta-data/mac`
 VPC_ID=`curl -s http://169.254.169.254/latest/meta-data/network/interfaces/macs/$mac/vpc-id`
-DB_URL=$(aws rds describe-db-instances | jq -r --arg VPC_ID "VPC_ID" '.DBInstances[] |select (.DBSubnetGroup.VpcId==$VPC_ID) | .Endpoint.Address')
-
+# DB_URL=$(aws rds describe-db-instances | jq -r --arg VPC_ID "VPC_ID" '.DBInstances[] |select (.DBSubnetGroup.VpcId==$VPC_ID) | .Endpoint.Address')
+DB_URL=$(aws rds describe-db-instances --db-instance-identifier ghost --query 'DBInstances[*].[Endpoint.Address]' --output text)
 
 ### EFS mount
 mkdir -p /var/lib/ghost/content

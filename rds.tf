@@ -4,6 +4,7 @@ resource "aws_db_subnet_group" "ghost" {
 }
 
 resource "aws_db_instance" "ghost" {
+  identifier           = "ghost"
   allocated_storage    = 20
   engine               = "mysql"
   storage_type         = "gp2"

@@ -11,6 +11,16 @@ resource "aws_lb_target_group" "ghost-ec2" {
   port     = 2368
   protocol = "HTTP"
   vpc_id   = aws_vpc.cloudx.id
+
+  health_check {
+    path = "/"
+    port = 2368
+    healthy_threshold = 2
+    interval = 300
+    timeout  = 120
+    unhealthy_threshold = 10
+    matcher = "200"
+  }
 }
 
 resource "aws_lb_target_group" "ghost-fargate" {

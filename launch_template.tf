@@ -3,7 +3,7 @@ data "aws_ami" "latest_amazon_linux" {
   most_recent = true
   filter {
       name = "name"
-      values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+      values = ["amzn2-ami-kernel-*-hvm-*-x86_64-gp2"]
   }
 }
 
@@ -20,15 +20,15 @@ resource "aws_launch_template" "ghost" {
     name = "ghost_app_profile"
   }
 
-  block_device_mappings {
-    device_name = "/dev/sda1"
+  # block_device_mappings {
+  #   device_name = "/dev/sda1"
 
-    ebs {
-      volume_size           = 8
-      volume_type           = "gp2"
-      delete_on_termination = true
-    }
-  }
+  #   ebs {
+  #     volume_size           = 8
+  #     volume_type           = "gp2"
+  #     delete_on_termination = true
+  #   }
+  # }
 
 #   network_interfaces {
 #     associate_public_ip_address = false
