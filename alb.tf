@@ -16,9 +16,9 @@ resource "aws_lb_target_group" "ghost-ec2" {
     path = "/"
     port = 2368
     healthy_threshold = 2
-    interval = 300
+    interval = 180
     timeout  = 120
-    unhealthy_threshold = 10
+    unhealthy_threshold = 5
     matcher = "200"
   }
 }
@@ -28,6 +28,7 @@ resource "aws_lb_target_group" "ghost-fargate" {
   port     = 2368
   protocol = "HTTP"
   vpc_id   = aws_vpc.cloudx.id
+  target_type = "ip"
 }
 
 resource "aws_lb_listener" "front_end" {

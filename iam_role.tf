@@ -40,7 +40,8 @@ resource "aws_iam_role" "ghost_app" {
                 "kms:Decrypt",
                 "elasticfilesystem:DescribeFileSystems",
                 "elasticfilesystem:ClientMount",
-                "elasticfilesystem:ClientWrite"
+                "elasticfilesystem:ClientWrite",
+                "rds:DescribeDBInstances"
           ]
           Effect   = "Allow"
           Resource = "*"

@@ -1,5 +1,5 @@
 variable "my_ip" {
-  default = "2.57.96.129/32"
+  default = "2.57.96.249/32"
 }
 
 variable "key_pair" {
